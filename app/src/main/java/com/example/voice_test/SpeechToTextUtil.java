@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
 import android.speech.SpeechRecognizer;
 import android.util.Log;
 
@@ -16,6 +17,7 @@ public class SpeechToTextUtil implements RecognitionListener {
     private SpeechRecognizer recognizer;
     private List<String> mResults;
     private SpeechToTextListener mSpeechToTextListener;
+    private Intent mIntent;
 
     public SpeechToTextUtil(Context context) {
         if (context instanceof SpeechToTextListener) {
@@ -25,23 +27,30 @@ public class SpeechToTextUtil implements RecognitionListener {
         if (SpeechRecognizer.isRecognitionAvailable(context)) {
             recognizer = SpeechRecognizer.createSpeechRecognizer(context);
         }
+
+        if(recognizer != null) {
+            mIntent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            mIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3);
+            mIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ru_RU");
+
+            recognizer.startListening(mIntent);
+        }
     }
 
-    public void onResume(Intent intent) {
+    public void onResume() {
         if (recognizer != null) {
-            recognizer.startListening(intent);
+            recognizer.startListening(mIntent);
             recognizer.setRecognitionListener(this);
         } else {
             onError("Ошибка SpeechRecognizer");
         }
     }
 
-    public void onStart(Intent intent) {
-        recognizer.startListening(intent);
-    }
-
     public void onPause() {
-        recognizer.stopListening();
+        if (recognizer != null) {
+            recognizer.stopListening();
+        }
     }
 
     private void onResult(String[] results) {
@@ -76,14 +85,17 @@ public class SpeechToTextUtil implements RecognitionListener {
         Log.i(TAG, "onEndOfSpeech");
     }
 
+    @Override
     public void onError(int error) {
-        mSpeechToTextListener.onError("ERROR " + error, 1);
+        if(mSpeechToTextListener != null) {
+            mSpeechToTextListener.onError("ERROR " + error, 1);
+        }
     }
 
     public void onResults(Bundle results) {
         mResults = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         Log.i(TAG, String.format("Result: %s", mResults));
-        mSpeechToTextListener.onResult(mResults.toArray(new String[0]));
+        onResult(mResults.toArray(new String[0]));
     }
 
     public void onPartialResults(Bundle partialResults) {
@@ -96,7 +108,6 @@ public class SpeechToTextUtil implements RecognitionListener {
 
     public interface SpeechToTextListener {
         void onResult(String[] results);
-
         void onError(String message, int code);
     }
 }
