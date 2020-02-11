@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">voice_test</string>
+    <string name="electricity">Предыдущее показание 0 от 01.01.1970</string>
+    <string name="hotWater">Предыдущее показание 0 от 01.01.1970</string>
+    <string name="coldWater">Предыдущее показание 0 от 01.01.1970</string>
+    <string name="voice">записать</string>
+    <string name="textViewTitle">голосовой прием показаний</string>
+    <string name="textViewElectricity">Электроэнергия</string>
+    <string name="textViewHotWater">Горячее водоснабжение</string>
+    <string name="textViewColdWater">Холодное водоснабжение</string>
+    <string name="textViewId">Лицевой счёт</string>
+    <string name="textViewCounterId">Номер счетчика</string>
+    <string name="textViewIdNumbers">00000 000000</string>
+    <string name="textViewCounterIdNumbers">000000000000</string>
+</resources>
