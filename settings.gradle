@@ -1,2 +1,1 @@
-include ':app'
-rootProject.name='voice_test'
+include ':app', ':speech'
