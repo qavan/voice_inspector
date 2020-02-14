@@ -11,8 +11,6 @@ import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
 
-import com.qavan.speech.ui.SpeechProgressView;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -33,7 +31,6 @@ public class Speech {
     private static Speech instance = null;
 
     private SpeechRecognizer mSpeechRecognizer;
-    private SpeechProgressView mProgressView;
     private String mCallingPackage;
     private boolean mPreferOffline = false;
     private boolean mGetPartialResults = true;
@@ -57,7 +54,7 @@ public class Speech {
     private long mLastActionTimestamp;
     private List<String> mLastPartialResults = null;
 
-    private final TextToSpeech.OnInitListener mTttsInitListener = new TextToSpeech.OnInitListener() {
+    private final TextToSpeech.OnInitListener mTtsInitListener = new TextToSpeech.OnInitListener() {
         @Override
         public void onInit(final int status) {
             switch (status) {
@@ -88,8 +85,7 @@ public class Speech {
 
         @Override
         public void onBeginningOfSpeech() {
-            if (mProgressView != null)
-                mProgressView.onBeginningOfSpeech();
+            //TODO visual voice detecting(color changing)
 
             mDelayedStopListening.start(new DelayedOperation.Operation() {
                 @Override
@@ -115,8 +111,7 @@ public class Speech {
                 Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechRmsChanged", exc);
             }
 
-            if (mProgressView != null)
-                mProgressView.onRmsChanged(v);
+            //TODO visual voice detecting
         }
 
         @Override
@@ -166,8 +161,7 @@ public class Speech {
                 Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechResult", exc);
             }
 
-            if (mProgressView != null)
-                mProgressView.onResultOrOnError();
+            //TODO visual voice error
 
             initSpeechRecognizer(mContext);
         }
@@ -185,8 +179,7 @@ public class Speech {
 
         @Override
         public void onEndOfSpeech() {
-            if (mProgressView != null)
-                mProgressView.onEndOfSpeech();
+            //TODO visual voice recognized
         }
 
         @Override
@@ -238,7 +231,7 @@ public class Speech {
     private void initTts(final Context context) {
         if (mTextToSpeech == null) {
             mTtsProgressListener = new TextToSpeechProgressListener(mContext, mTtsCallbacks);
-            mTextToSpeech = new TextToSpeech(context.getApplicationContext(), mTttsInitListener);
+            mTextToSpeech = new TextToSpeech(context.getApplicationContext(), mTtsInitListener);
             mTextToSpeech.setOnUtteranceProgressListener(mTtsProgressListener);
             mTextToSpeech.setLanguage(mLocale);
             mTextToSpeech.setPitch(mTtsPitch);
@@ -352,7 +345,7 @@ public class Speech {
      * @throws SimpleException.SpeechRecognitionNotAvailable      when speech recognition is not available on the device
      * @throws SimpleException.GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
-    public void startListening(final SpeechProgressView progressView, final SpeechDelegate delegate)
+    public void startListening(final String progressView, final SpeechDelegate delegate)
             throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException, SimpleException.GoogleVoiceTypingDisabledException {
         if (mIsListening) return;
 
@@ -407,7 +400,6 @@ public class Speech {
 
     private void unregisterDelegate() {
         mDelegate = null;
-        mProgressView = null;
     }
 
     private void updateLastActionTimestamp() {

@@ -34,8 +34,7 @@ public class MainActivity extends Activity {
             new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.AddWhiteListActivity")),
             new Intent().setComponent(new ComponentName("com.iqoo.secure", "com.iqoo.secure.ui.phoneoptimize.BgStartUpManager")),
             new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity")),
-            new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(
-                    Uri.parse("mobilemanager://function/entry/AutoStart"))
+            new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(Uri.parse("mobilemanager://function/entry/AutoStart"))
     };
 
     @Override
@@ -46,9 +45,6 @@ public class MainActivity extends Activity {
         btStartService = findViewById(R.id.btStartService);
         btListen = findViewById(R.id.button);
         tvText = findViewById(R.id.textViewTitle);
-        //Some devices will not allow background service to work, So we have to enable autoStart for the app.
-        //As per now we are not having any way to check autoStart is enable or not,so better to give this in LoginArea,
-        //so user will not get this popup again and again until he logout
         enableAutoStart();
 
         if (checkServiceRunning()) {
