@@ -47,7 +47,7 @@ public class Speech {
     private Context mContext;
 
     private TextToSpeech mTextToSpeech;
-    private final Map<String, TextToSpeechCallback> mTtsCallbacks = new HashMap<>();
+    private final Map<String, TextToSpeechProgressListener.TextToSpeechCallback> mTtsCallbacks = new HashMap<>();
     private Locale mLocale = Locale.getDefault();
     private float mTtsRate = 1.0f;
     private float mTtsPitch = 1.0f;
@@ -112,8 +112,7 @@ public class Speech {
                 if (mDelegate != null)
                     mDelegate.onSpeechRmsChanged(v);
             } catch (final Throwable exc) {
-                Logger.error(Speech.class.getSimpleName(),
-                        "Unhandled exception in delegate onSpeechRmsChanged", exc);
+                Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechRmsChanged", exc);
             }
 
             if (mProgressView != null)
@@ -130,8 +129,7 @@ public class Speech {
             if (partialResults != null && !partialResults.isEmpty()) {
                 mPartialData.clear();
                 mPartialData.addAll(partialResults);
-                mUnstableData = unstableData != null && !unstableData.isEmpty()
-                        ? unstableData.get(0) : null;
+                mUnstableData = unstableData != null && !unstableData.isEmpty() ? unstableData.get(0) : null;
                 try {
                     if (mLastPartialResults == null || !mLastPartialResults.equals(partialResults)) {
                         if (mDelegate != null)
@@ -139,8 +137,7 @@ public class Speech {
                         mLastPartialResults = partialResults;
                     }
                 } catch (final Throwable exc) {
-                    Logger.error(Speech.class.getSimpleName(),
-                            "Unhandled exception in delegate onSpeechPartialResults", exc);
+                    Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechPartialResults", exc);
                 }
             }
         }
@@ -153,8 +150,7 @@ public class Speech {
 
             final String result;
 
-            if (results != null && !results.isEmpty()
-                    && results.get(0) != null && !results.get(0).isEmpty()) {
+            if (results != null && !results.isEmpty() && results.get(0) != null && !results.get(0).isEmpty()) {
                 result = results.get(0);
             } else {
                 Logger.info(Speech.class.getSimpleName(), "No speech results, getting partial");
@@ -167,8 +163,7 @@ public class Speech {
                 if (mDelegate != null)
                     mDelegate.onSpeechResult(result.trim());
             } catch (final Throwable exc) {
-                Logger.error(Speech.class.getSimpleName(),
-                        "Unhandled exception in delegate onSpeechResult", exc);
+                Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechResult", exc);
             }
 
             if (mProgressView != null)
@@ -222,8 +217,7 @@ public class Speech {
                 try {
                     mSpeechRecognizer.destroy();
                 } catch (final Throwable exc) {
-                    Logger.debug(Speech.class.getSimpleName(),
-                            "Non-Fatal error while destroying speech. " + exc.getMessage());
+                    Logger.debug(Speech.class.getSimpleName(), "Non-Fatal error while destroying speech. " + exc.getMessage());
                 } finally {
                     mSpeechRecognizer = null;
                 }
@@ -243,7 +237,7 @@ public class Speech {
 
     private void initTts(final Context context) {
         if (mTextToSpeech == null) {
-            mTtsProgressListener = new TtsProgressListener(mContext, mTtsCallbacks);
+            mTtsProgressListener = new TextToSpeechProgressListener(mContext, mTtsCallbacks);
             mTextToSpeech = new TextToSpeech(context.getApplicationContext(), mTttsInitListener);
             mTextToSpeech.setOnUtteranceProgressListener(mTtsProgressListener);
             mTextToSpeech.setLanguage(mLocale);
@@ -343,11 +337,10 @@ public class Speech {
      * Starts voice recognition.
      *
      * @param delegate delegate which will receive speech recognition events and status
-     * @throws SpeechRecognitionNotAvailable      when speech recognition is not available on the device
-     * @throws GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
+     * @throws SimpleException.SpeechRecognitionNotAvailable      when speech recognition is not available on the device
+     * @throws SimpleException.GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
-    public void startListening(final SpeechDelegate delegate)
-            throws SpeechRecognitionNotAvailable, GoogleVoiceTypingDisabledException {
+    public void startListening(final SpeechDelegate delegate) throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException {
         startListening(null, delegate);
     }
 
@@ -356,15 +349,15 @@ public class Speech {
      *
      * @param progressView view in which to draw speech animation
      * @param delegate     delegate which will receive speech recognition events and status
-     * @throws SpeechRecognitionNotAvailable      when speech recognition is not available on the device
-     * @throws GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
+     * @throws SimpleException.SpeechRecognitionNotAvailable      when speech recognition is not available on the device
+     * @throws SimpleException.GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
     public void startListening(final SpeechProgressView progressView, final SpeechDelegate delegate)
-            throws SpeechRecognitionNotAvailable, GoogleVoiceTypingDisabledException {
+            throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException, SimpleException.GoogleVoiceTypingDisabledException {
         if (mIsListening) return;
 
         if (mSpeechRecognizer == null)
-            throw new SpeechRecognitionNotAvailable();
+            throw new SimpleException.SpeechRecognitionNotAvailable();
 
         if (delegate == null)
             throw new IllegalArgumentException("delegate must be defined!");
@@ -397,7 +390,7 @@ public class Speech {
         try {
             mSpeechRecognizer.startListening(intent);
         } catch (final SecurityException exc) {
-            throw new GoogleVoiceTypingDisabledException();
+            throw new SimpleException.GoogleVoiceTypingDisabledException();
         }
 
         mIsListening = true;
@@ -407,8 +400,7 @@ public class Speech {
             if (mDelegate != null)
                 mDelegate.onStartOfSpeech();
         } catch (final Throwable exc) {
-            Logger.error(Speech.class.getSimpleName(),
-                    "Unhandled exception in delegate onStartOfSpeech", exc);
+            Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onStartOfSpeech", exc);
         }
 
     }
@@ -462,8 +454,7 @@ public class Speech {
             if (mDelegate != null)
                 mDelegate.onSpeechResult(getPartialResultsAsString());
         } catch (final Throwable exc) {
-            Logger.error(Speech.class.getSimpleName(),
-                    "Unhandled exception in delegate onSpeechResult", exc);
+            Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechResult", exc);
         }
 
 //        if (mProgressView != null)
@@ -497,7 +488,7 @@ public class Speech {
      * @param message  message to play
      * @param callback callback which will receive progress status of the operation
      */
-    public void say(final String message, final TextToSpeechCallback callback) {
+    public void say(final String message, final TextToSpeechProgressListener.TextToSpeechCallback callback) {
 
         final String utteranceId = UUID.randomUUID().toString();
 

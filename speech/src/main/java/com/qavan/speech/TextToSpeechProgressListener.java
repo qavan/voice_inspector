@@ -7,12 +7,12 @@ import android.speech.tts.UtteranceProgressListener;
 import java.lang.ref.WeakReference;
 import java.util.Map;
 
-public class TtsProgressListener extends UtteranceProgressListener {
+public class TextToSpeechProgressListener extends UtteranceProgressListener {
 
     private final Map<String, TextToSpeechCallback> mTtsCallbacks;
     private final WeakReference<Context> contextWeakReference;
 
-    public TtsProgressListener(final Context context, final Map<String, TextToSpeechCallback> mTtsCallbacks) {
+    public TextToSpeechProgressListener(final Context context, final Map<String, TextToSpeechCallback> mTtsCallbacks) {
         contextWeakReference = new WeakReference<>(context);
         this.mTtsCallbacks = mTtsCallbacks;
     }
@@ -51,7 +51,6 @@ public class TtsProgressListener extends UtteranceProgressListener {
     public void onError(final String utteranceId) {
         final TextToSpeechCallback callback = mTtsCallbacks.get(utteranceId);
         final Context context = contextWeakReference.get();
-
         if (callback != null && context != null) {
             new Handler(context.getMainLooper()).post(new Runnable() {
                 @Override
@@ -62,4 +61,13 @@ public class TtsProgressListener extends UtteranceProgressListener {
             });
         }
     }
+
+    public interface TextToSpeechCallback {
+        void onStart();
+
+        void onCompleted();
+
+        void onError();
+    }
+
 }
