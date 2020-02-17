@@ -106,11 +106,11 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
         AudioManager amAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
         if (amAudioManager != null) {
-            amAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
-            amAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true);
+//            amAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
+//            amAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true);
             amAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
-            amAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-            amAudioManager.setStreamMute(AudioManager.STREAM_RING, true);
+//            amAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
+//            amAudioManager.setStreamMute(AudioManager.STREAM_RING, true);
         }
     }
 
@@ -122,7 +122,7 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
 
         AlarmManager amAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert amAlarmManager != null;
-        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 3000, service);
+        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 200, service);
         super.onTaskRemoved(rootIntent);
     }
 

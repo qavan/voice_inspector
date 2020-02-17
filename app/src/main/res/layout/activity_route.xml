@@ -11,36 +11,49 @@
         android:id="@+id/textViewTitleLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="-15dp"
-        android:gravity="bottom|center_vertical">
+        android:layout_marginTop="15dp"
+        android:gravity="bottom|center_vertical"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
 
         <TextView
             android:id="@+id/textViewTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
             android:fontFamily="@font/roboto"
             android:gravity="start"
+            android:onClick="addCard"
             android:paddingStart="18dp"
             android:paddingEnd="0dp"
             android:text="@string/ROUT_TITLE"
             android:textAlignment="gravity"
             android:textAllCaps="true"
-            android:textColor="@color/colorBlackPrimaryNotSoLight"
+            android:textColor="@color/colorBlackPrimaryNotSoLightOP50"
             android:textDirection="inherit"
             android:textSize="16sp"
             android:textStyle="bold" />
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <ToggleButton
+            android:id="@+id/idCheckBoxService"
+            android:layout_width="55dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:text="@string/start_service_before"
+            android:textColor="@color/colorBlackPrimary"
+            android:textOff="@string/start_service_before"
+            android:textOn="@string/stop_service_after"
+            android:textSize="12sp" />
+
+        <ToggleButton
+            android:id="@+id/idCheckBoxViewControl"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="-20dp"
             android:layout_weight="1"
-            android:text="@string/ROUT_CHECKBOX_TEXT"
-            android:textColor="@color/colorBlackPrimaryLight" />
+            android:text="@string/CARD_VIEW_CONTROL_OFF"
+            android:textColor="@color/colorBlackPrimary"
+            android:textOff="@string/CARD_VIEW_CONTROL_OFF"
+            android:textOn="@string/CARD_VIEW_CONTROL_ON"
+            android:textSize="12sp" />
 
     </LinearLayout>
 
@@ -58,18 +71,21 @@
             android:gravity="center|top"
             android:isScrollContainer="true"
             android:orientation="vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
             android:scrollbars="vertical">
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardViewProcess"
-                android:layout_width="347dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="2dp"
-                android:background="#FFFFFF"
+                android:background="@color/colorWhite"
                 app:cardCornerRadius="10dp">
 
                 <LinearLayout
+                    android:id="@+id/idCardLL"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
@@ -78,7 +94,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView1"
+                        android:id="@+id/idCardStatus"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:elegantTextHeight="false"
@@ -92,7 +108,7 @@
                         android:textStyle="normal|bold" />
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/idCardTitle"
                         android:layout_width="match_parent"
                         android:layout_height="24dp"
                         android:layout_marginTop="5dp"
@@ -103,7 +119,7 @@
                         android:textStyle="normal|bold" />
 
                     <TextView
-                        android:id="@+id/textView3"
+                        android:id="@+id/idCardAddress"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -116,23 +132,24 @@
                         android:textStyle="normal" />
 
                     <LinearLayout
+                        android:id="@+id/idCardBottom"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/textView4"
+                            android:id="@+id/idCardDate"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
                             android:fontFamily="@font/roboto"
                             android:text="@string/ROUT_CARD_DATE_PLACEHOLDER"
-                            android:textColor="@color/colorBlackPrimaryLight"
+                            android:textColor="@color/colorBlackPrimaryLightOP45"
                             android:textSize="14sp"
                             android:textStyle="normal" />
 
                         <TextView
-                            android:id="@+id/textView5"
+                            android:id="@+id/idCardWtf"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
@@ -140,7 +157,7 @@
                             android:fontFamily="@font/roboto"
                             android:text="@string/ROUT_CARD_PERSON_PLACEHOLDER"
                             android:textAlignment="textEnd"
-                            android:textColor="@color/colorBlackPrimaryLight"
+                            android:textColor="@color/colorBlackPrimaryLightOP45"
                             android:textSize="14sp"
                             android:textStyle="normal" />
                     </LinearLayout>
@@ -148,272 +165,6 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewWait"
-                android:layout_width="347dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FFFFFF"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_marginEnd="0dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView12"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elegantTextHeight="false"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto"
-                        android:letterSpacing="0"
-                        android:text="@string/ROUT_CARD_STATUS_WAIT"
-                        android:textAllCaps="true"
-                        android:textColor="@color/addOrange"
-                        android:textSize="12sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView22"
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/ROUT_CARD_TITLE_PLACEHOLDER"
-                        android:textColor="@color/colorBlackPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView32"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:maxLines="2"
-                        android:minLines="2"
-                        android:text="@string/ROUT_CARD_ADDRESS_PLACEHOLDER_FULL"
-                        android:textColor="@color/colorBlackPrimary"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView42"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_DATE_PLACEHOLDER"
-                            android:textColor="@color/colorBlackPrimaryLight"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-
-                        <TextView
-                            android:id="@+id/textView52"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_PERSON_PLACEHOLDER"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/colorBlackPrimaryLight"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewDead"
-                android:layout_width="347dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FFFFFF"
-                android:visibility="visible"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_marginEnd="0dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView13"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elegantTextHeight="false"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto"
-                        android:letterSpacing="0"
-                        android:text="@string/ROUT_CARD_STATUS_DEAD"
-                        android:textAllCaps="true"
-                        android:textColor="@color/addRed"
-                        android:textSize="12sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView23"
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/ROUT_CARD_TITLE_PLACEHOLDER"
-                        android:textColor="@color/colorBlackPrimary"
-                        android:textSize="18sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView33"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:maxLines="2"
-                        android:minLines="2"
-                        android:text="@string/ROUT_CARD_ADDRESS_PLACEHOLDER_FULL"
-                        android:textColor="@color/colorBlackPrimary"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView43"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_DATE_PLACEHOLDER"
-                            android:textColor="@color/colorBlackPrimaryLight"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-
-                        <TextView
-                            android:id="@+id/textView53"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_PERSON_PLACEHOLDER"
-                            android:textAlignment="textEnd"
-                            android:textColor="@color/colorBlackPrimaryLight"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/cardViewTemp"
-                android:layout_width="347dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="2dp"
-                android:background="#FFFFFF"
-                android:visibility="gone"
-                app:cardCornerRadius="10dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_marginEnd="0dp"
-                    android:gravity="center_vertical"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/textView14"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:elegantTextHeight="false"
-                        android:ems="10"
-                        android:fontFamily="@font/roboto"
-                        android:letterSpacing="0"
-                        android:text="@string/ROUT_CARD_STATUS_PROCESS"
-                        android:textAllCaps="true"
-                        android:textColor="#53AB78"
-                        android:textSize="12sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView24"
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:text="@string/ROUT_CARD_TITLE_PLACEHOLDER"
-                        android:textColor="#1A3951"
-                        android:textSize="18sp"
-                        android:textStyle="normal|bold" />
-
-                    <TextView
-                        android:id="@+id/textView34"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:fontFamily="@font/roboto"
-                        android:maxLines="2"
-                        android:minLines="2"
-                        android:text="@string/ROUT_CARD_ADDRESS_PLACEHOLDER_FULL"
-                        android:textColor="#1A3951"
-                        android:textSize="14sp"
-                        android:textStyle="normal" />
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/textView44"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_DATE_PLACEHOLDER"
-                            android:textColor="#731A3951"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-
-                        <TextView
-                            android:id="@+id/textView54"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/roboto"
-                            android:text="@string/ROUT_CARD_PERSON_PLACEHOLDER"
-                            android:textAlignment="textEnd"
-                            android:textColor="#731A3951"
-                            android:textSize="14sp"
-                            android:textStyle="normal" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

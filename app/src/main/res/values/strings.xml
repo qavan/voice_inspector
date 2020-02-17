@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">Голосовой инспектор</string>
     <string name="permission_required">Требуется разрешение на использование микрофона</string>
-    <string name="start_service">ЗАПУСТИТЬ СЛУЖБУ</string>
-    <string name="stop_service">ОСТАНОВИТЬ СЛУЖБУ</string>
+    <string name="start_service_before">OFF</string>
+    <string name="stop_service_after">ON</string>
 
     <string name="voice_recognizer_is_active">Распознавание голоса активно…</string>
-    <string name="ask_permission">Для корректной работы приложения требуется автозапуск службы…</string>
-    <string name="allow">ВКЛЮЧИТЬ</string>
-    <string name="enable_autostart">Включить автозапуск службы приложения</string>
+    <string name="allow">ДОБАВИТЬ В АВТОЗАПУСК</string>
+    <string name="enable_autostart">Включите автозапуск для службы голосового помощника</string>
+    <string name="ask_permission">Для корректной работы приложения требуется работа службы голосового помощника в фоновом режиме</string>
     <string name="my_service_name">com.qavan.voice_inspector.service</string>
 
 
@@ -21,13 +21,16 @@
     <string name="CARD_INDICATOR_ID">Номер счетчика</string>
     <string name="CARD_ID_PLACEHOLDER">00000 000000</string>
     <string name="CARD_INDICATOR_ID_PLACEHOLDER">000000000000</string>
+
+    <string name="CARD_VIEW_CONTROL_ON">SMALL</string>
+    <string name="CARD_VIEW_CONTROL_OFF">LARGE</string>
+
     <string name="ROUT_CARD_STATUS_PROCESS">взято в работу</string>
     <string name="ROUT_CARD_TITLE_PLACEHOLDER">Прием показаний от 01.01.1970</string>
-    <string name="ROUT_CARD_ADDRESS_PLACEHOLDER_FULL">Улица радистов, дом онанистов, корпус дебилов, квартира не квартира блять</string>
+    <string name="ROUT_CARD_ADDRESS_PLACEHOLDER_FULL">Тут должен быть адрес в две строки, просто верь этой надписи</string>
     <string name="ROUT_CARD_DATE_PLACEHOLDER">До 01.01.1970</string>
-    <string name="ROUT_CARD_PERSON_PLACEHOLDER">Лицо не лицо блять</string>
-    <string name="ROUT_CARD_STATUS_WAIT">Надо сделать, алло нахуй, сроки горят</string>
-    <string name="ROUT_CARD_STATUS_DEAD">поздравляю, ты проебался по срокам</string>
+    <string name="ROUT_CARD_PERSON_PLACEHOLDER">Клиент</string>
+    <string name="ROUT_CARD_STATUS_WAIT">Ожидает выполнения</string>
+    <string name="ROUT_CARD_STATUS_DEAD">Отменен</string>
     <string name="ROUT_TITLE">Маршрутный лист</string>
-    <string name="ROUT_CHECKBOX_TEXT">компактно</string>
 </resources>
