@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainLinearLayout"
+    android:id="@+id/cardMainLinearLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E8F0F7"
@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto"
-            android:text="@string/textViewTitle"
+            android:text="@string/CARD_TITLE"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:textDirection="inherit"
@@ -46,7 +46,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/InOne"
+        android:id="@+id/cardsLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="460dp"
         android:background="#FFFFFF"
@@ -76,7 +76,7 @@
                     android:id="@+id/textViewCounterId"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/textViewCounterId"
+                    android:text="@string/CARD_INDICATOR_ID"
                     android:textColor="#731A3951"
                     android:textSize="18sp"
                     android:textStyle="normal" />
@@ -85,7 +85,7 @@
                     android:id="@+id/textViewCounterIdNumbers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/textViewCounterIdNumbers"
+                    android:text="@string/CARD_INDICATOR_ID_PLACEHOLDER"
                     android:textAlignment="center"
                     android:textColor="#1A3951"
                     android:textSize="20sp" />
@@ -103,7 +103,7 @@
                     android:id="@+id/textViewId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/textViewId"
+                    android:text="@string/CARD_ID"
                     android:textAlignment="center"
                     android:textColor="#731A3951"
                     android:textSize="18sp"
@@ -113,7 +113,7 @@
                     android:id="@+id/textViewIdNumbers"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/textViewIdNumbers"
+                    android:text="@string/CARD_ID_PLACEHOLDER"
                     android:textAlignment="center"
                     android:textColor="#1A3951"
                     android:textSize="20sp" />
@@ -135,7 +135,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="@string/textViewElectricity"
+                android:text="@string/CARD_ELECTRICITY"
                 android:textColor="#1A3951"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -144,7 +144,7 @@
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="@string/electricity"
+                android:hint="@string/CARD_INDICATOR_HINT"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:singleLine="false"
@@ -168,7 +168,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="@string/textViewHotWater"
+                android:text="@string/CARD_HOT_WATER"
                 android:textColor="#1A3951"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -177,7 +177,7 @@
                 android:id="@+id/editText2"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="@string/hotWater"
+                android:hint="@string/CARD_INDICATOR_HINT"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:textColorHint="#2B78BF"
@@ -199,7 +199,7 @@
                 android:layout_marginEnd="0dp"
                 android:layout_weight="1"
                 android:fontFamily="sans-serif"
-                android:text="@string/textViewColdWater"
+                android:text="@string/CARD_COLD_WATER"
                 android:textColor="#1A3951"
                 android:textSize="18sp"
                 android:textStyle="bold" />
@@ -208,7 +208,7 @@
                 android:id="@+id/editText3"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
-                android:hint="@string/coldWater"
+                android:hint="@string/CARD_INDICATOR_HINT"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:textColorHint="#2B78BF"
@@ -231,7 +231,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="6dp"
                 android:background="@drawable/button_shape_blue"
-                android:text="@string/voice"
+                android:text="@string/CARD_RECORD_BUTTON"
                 android:textColor="#FFFFFF"
                 android:textSize="14sp" />
 

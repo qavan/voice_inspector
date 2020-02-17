@@ -100,7 +100,7 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
     }
 
     /**
-     * Function to remove the beep sound of voice recognizer.
+     * Function to remove the beep sound of CARD_RECORD_BUTTON recognizer.
      */
     private void muteBeepSoundOfRecorder() {
         AudioManager amAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);

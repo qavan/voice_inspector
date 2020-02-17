@@ -40,41 +40,42 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_card);
+        setContentView(R.layout.activity_route);
 
-        btStartService = findViewById(R.id.btStartService);
-        btListen = findViewById(R.id.button);
-        tvText = findViewById(R.id.textViewTitle);
-        enableAutoStart();
-
-        if (checkServiceRunning()) {
-            btStartService.setText(getString(R.string.stop_service));
-            tvText.setVisibility(View.VISIBLE);
-        }
-
-        btStartService.setOnClickListener(v -> {
-            if (btStartService.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
-                startService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
-                btStartService.setText(getString(R.string.stop_service));
-                tvText.setVisibility(View.VISIBLE);
-            } else {
-                stopService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
-                btStartService.setText(getString(R.string.start_service));
-                tvText.setVisibility(View.GONE);
-            }
-        });
-
-        btListen.setOnClickListener(v -> {
-            if (btListen.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
-                startService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
-                btListen.setText(getString(R.string.stop_service));
-                tvText.setVisibility(View.VISIBLE);
-            } else {
-                stopService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
-                btListen.setText(getString(R.string.start_service));
-                tvText.setVisibility(View.GONE);
-            }
-        });
+//        btStartService = findViewById(R.id.btStartService);
+//        btListen = findViewById(R.id.button);
+//        tvText = findViewById(R.id.textViewTitle);
+//        enableAutoStart();
+//
+//        if (checkServiceRunning()) {
+//            btStartService.setText(getString(R.string.stop_service));
+//            tvText.setVisibility(View.VISIBLE);
+//        }
+//
+//        btStartService.setOnClickListener(v -> {
+//            if (btStartService.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
+//                startService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
+//                btStartService.setText(getString(R.string.stop_service));
+//                tvText.setVisibility(View.VISIBLE);
+//            } else {
+//                stopService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
+//                btStartService.setText(getString(R.string.start_service));
+//                tvText.setVisibility(View.GONE);
+//            }
+//        });
+//
+//        btListen.setOnClickListener(v -> {
+//            if (btListen.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
+//                startService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
+//                btListen.setText(getString(R.string.stop_service));
+//                tvText.setVisibility(View.VISIBLE);
+//            } else {
+//                stopService(new Intent(MainActivity.this, BackgroundRecognizerService.class));
+//                btListen.setText(getString(R.string.start_service));
+//                tvText.setVisibility(View.GONE);
+//            }
+//        });
     }
 
     private void enableAutoStart() {

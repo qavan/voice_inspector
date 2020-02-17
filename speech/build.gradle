@@ -77,7 +77,7 @@ bintray {
         vcsUrl = gitUrl
         issueTrackerUrl = siteUrl + "/issues/"
         licenses = ["Apache-2.0"]
-        labels = ['android', 'speech', 'library', 'text', 'voice', 'recognition', 'text to speech']
+        labels = ['android', 'speech', 'library', 'text', 'CARD_RECORD_BUTTON', 'recognition', 'text to speech']
         publicDownloadNumbers = true
         publish = true
     }

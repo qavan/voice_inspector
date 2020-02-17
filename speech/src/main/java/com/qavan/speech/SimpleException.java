@@ -3,7 +3,7 @@ package com.qavan.speech;
 public class SimpleException extends Exception {
     public static class GoogleVoiceTypingDisabledException extends Exception {
         public GoogleVoiceTypingDisabledException() {
-            super("Google voice typing must be enabled");
+            super("Google CARD_RECORD_BUTTON typing must be enabled");
         }
     }
 

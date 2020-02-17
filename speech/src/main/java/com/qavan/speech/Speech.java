@@ -85,7 +85,7 @@ public class Speech {
 
         @Override
         public void onBeginningOfSpeech() {
-            //TODO visual voice detecting(color changing)
+            //TODO visual CARD_RECORD_BUTTON detecting(color changing)
 
             mDelayedStopListening.start(new DelayedOperation.Operation() {
                 @Override
@@ -111,7 +111,7 @@ public class Speech {
                 Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechRmsChanged", exc);
             }
 
-            //TODO visual voice detecting
+            //TODO visual CARD_RECORD_BUTTON detecting
         }
 
         @Override
@@ -161,7 +161,7 @@ public class Speech {
                 Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechResult", exc);
             }
 
-            //TODO visual voice error
+            //TODO visual CARD_RECORD_BUTTON error
 
             initSpeechRecognizer(mContext);
         }
@@ -179,7 +179,7 @@ public class Speech {
 
         @Override
         public void onEndOfSpeech() {
-            //TODO visual voice recognized
+            //TODO visual CARD_RECORD_BUTTON recognized
         }
 
         @Override
@@ -270,11 +270,11 @@ public class Speech {
      *
      * @param context        application context
      * @param callingPackage The extra key used in an intent to the speech recognizer for
-     *                       voice search. Not generally to be used by developers.
+     *                       CARD_RECORD_BUTTON search. Not generally to be used by developers.
      *                       The system search dialog uses this, for example, to set a calling
-     *                       package for identification by a voice search API.
+     *                       package for identification by a CARD_RECORD_BUTTON search API.
      *                       If this extra is set by anyone but the system process,
-     *                       it should be overridden by the voice search implementation.
+     *                       it should be overridden by the CARD_RECORD_BUTTON search implementation.
      *                       By passing null or empty string (which is the default) you are
      *                       not overriding the calling package
      * @return speech instance
@@ -327,23 +327,23 @@ public class Speech {
     }
 
     /**
-     * Starts voice recognition.
+     * Starts CARD_RECORD_BUTTON recognition.
      *
      * @param delegate delegate which will receive speech recognition events and status
      * @throws SimpleException.SpeechRecognitionNotAvailable      when speech recognition is not available on the device
-     * @throws SimpleException.GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
+     * @throws SimpleException.GoogleVoiceTypingDisabledException when google CARD_RECORD_BUTTON typing is disabled on the device
      */
     public void startListening(final SpeechDelegate delegate) throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException {
         startListening(null, delegate);
     }
 
     /**
-     * Starts voice recognition.
+     * Starts CARD_RECORD_BUTTON recognition.
      *
      * @param progressView view in which to draw speech animation
      * @param delegate     delegate which will receive speech recognition events and status
      * @throws SimpleException.SpeechRecognitionNotAvailable      when speech recognition is not available on the device
-     * @throws SimpleException.GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
+     * @throws SimpleException.GoogleVoiceTypingDisabledException when google CARD_RECORD_BUTTON typing is disabled on the device
      */
     public void startListening(final String progressView, final SpeechDelegate delegate)
             throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException, SimpleException.GoogleVoiceTypingDisabledException {
@@ -411,8 +411,8 @@ public class Speech {
     }
 
     /**
-     * Stops voice recognition listening.
-     * This method does nothing if voice listening is not active
+     * Stops CARD_RECORD_BUTTON recognition listening.
+     * This method does nothing if CARD_RECORD_BUTTON listening is not active
      */
     public void stopListening() {
         if (!mIsListening) return;
@@ -457,9 +457,9 @@ public class Speech {
     }
 
     /**
-     * Check if voice recognition is currently active.
+     * Check if CARD_RECORD_BUTTON recognition is currently active.
      *
-     * @return true if the voice recognition is on, false otherwise
+     * @return true if the CARD_RECORD_BUTTON recognition is on, false otherwise
      */
     public boolean isListening() {
         return mIsListening;
@@ -563,7 +563,7 @@ public class Speech {
      * This has no effect on any pre-recorded speech.
      *
      * @param pitch Speech pitch. 1.0 is the normal pitch, lower values lower the tone of the
-     *              synthesized voice, greater values increase it.
+     *              synthesized CARD_RECORD_BUTTON, greater values increase it.
      * @return speech instance
      */
     public Speech setTextToSpeechPitch(final float pitch) {
