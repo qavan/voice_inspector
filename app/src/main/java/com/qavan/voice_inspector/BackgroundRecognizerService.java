@@ -19,13 +19,24 @@ import com.qavan.speech.Speech;
 import com.qavan.speech.SpeechDelegate;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
 public class BackgroundRecognizerService extends Service implements SpeechDelegate, Speech.stopDueToDelay {
-
     public static SpeechDelegate delegate;
+    private boolean triggeredKeyWord = false;
+    private String currentFocus = "rout";
+    private int ticks = 0;
+
+    private final int MAX_TICK_COUNT = 5;
+    private String KEY_WORD_ACTIVATION;
+    private ArrayList<String> KEY_WORDS_SEARCH_BY_NUMBER;
+    private ArrayList<String> KEY_WORDS_SEARCH_BY_ID;
+    private ArrayList<String> KEY_WORDS_SEARCH_BY_ROOM;
+    private String KEY_WORD_UPDATE;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -46,9 +57,14 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
             muteBeepSoundOfRecorder();
         } else {
             System.setProperty("rx.unsafe-disable", "True");
-            RxPermissions.getInstance(this).request(Manifest.permission.RECORD_AUDIO).subscribe(this::checkPicrophonePremissionVoidUtil);
+            RxPermissions.getInstance(this).request(Manifest.permission.RECORD_AUDIO).subscribe(this::checkMicrophonePermissionVoidUtil);
             muteBeepSoundOfRecorder();
         }
+        KEY_WORD_ACTIVATION = getResources().getString(R.string.KEY_WORD_ACTIVATION);
+        KEY_WORDS_SEARCH_BY_NUMBER = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.KEY_WORD_SEARCH_BY_NUMBER)));
+        KEY_WORDS_SEARCH_BY_ID = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.KEY_WORDS_SEARCH_BY_ID)));
+        KEY_WORDS_SEARCH_BY_ROOM = new ArrayList<>(Arrays.asList(getResources().getStringArray(R.array.KEY_WORDS_SEARCH_BY_ROOM)));
+        KEY_WORD_UPDATE = getResources().getString(R.string.KEY_WORD_UPDATE);
         return Service.START_STICKY;
     }
 
@@ -75,9 +91,45 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
 
     @Override
     public void onSpeechResult(String result) {
-        Log.d("Result", result + "");
+        result = result.toLowerCase();
+        Log.d("ON_SPEECH_RESULT", result + "");
+//        Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
         if (!TextUtils.isEmpty(result)) {
-            Toast.makeText(this, result, Toast.LENGTH_SHORT).show();
+            if (currentFocus.equals("rout")) {
+                if (result.contains(KEY_WORD_ACTIVATION)) {
+                    ticks = 0;
+                    triggeredKeyWord = true;
+                    Log.d("ON_SPEECH_RESULT", "ACTIVATED");
+                } else if (KEY_WORDS_SEARCH_BY_NUMBER.contains(result)) {
+                    //TODO ADD SEARCH BY NUMBER OF COUNTER WITH PROCESSING OF SIMILAR RESULT
+                    ticks = 0;
+                    Log.d("ON_SPEECH_RESULT", "KEY_WORD_SEARCH_BY_NUMBER");
+                } else if (KEY_WORDS_SEARCH_BY_ID.contains(result)) {
+                    //TODO ADD SEARCH BY ID WITH PROCESSING OF SIMILAR RESULT
+                    ticks = 0;
+                    Log.d("ON_SPEECH_RESULT", "KEY_WORD_SEARCH_BY_ID");
+                } else if (KEY_WORDS_SEARCH_BY_ROOM.contains(result)) {
+                    //TODO ADD SEARCH BY ROOM WITH PROCESSING OF SIMILAR RESULT
+                    ticks = 0;
+                    Log.d("ON_SPEECH_RESULT", "KEY_WORD_SEARCH_BY_ROOM");
+                } else if (result.contains(KEY_WORD_UPDATE)) {
+                    //TODO ADD UPDATE
+                    ticks = 0;
+                    Log.d("ON_SPEECH_RESULT", "KEY_WORD_UPDATE");
+                }
+            }
+            //TODO ADD FOCUS OF CARD
+        } else {
+            if (ticks < MAX_TICK_COUNT && triggeredKeyWord) {
+                ticks += 1;
+                Log.d("ON_SPEECH_RESULT", String.format("TICK +1 %s", ticks));
+            } else if (ticks >= MAX_TICK_COUNT && triggeredKeyWord) {
+                ticks = 0;
+                triggeredKeyWord = false;
+                Log.d("ON_SPEECH_RESULT", "DEACTIVATED");
+            } else {
+                Log.d("ON_SPEECH_RESULT", "PASS");
+            }
         }
     }
 
@@ -94,7 +146,7 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
             muteBeepSoundOfRecorder();
             Speech.getInstance().stopListening();
         } else {
-            RxPermissions.getInstance(this).request(Manifest.permission.RECORD_AUDIO).subscribe(this::checkPicrophonePremissionVoidUtil);
+            RxPermissions.getInstance(this).request(Manifest.permission.RECORD_AUDIO).subscribe(this::checkMicrophonePermissionVoidUtil);
             muteBeepSoundOfRecorder();
         }
     }
@@ -122,11 +174,11 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
 
         AlarmManager amAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert amAlarmManager != null;
-        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 200, service);
+        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 3000, service);
         super.onTaskRemoved(rootIntent);
     }
 
-    void checkPicrophonePremissionVoidUtil(boolean granted) {
+    void checkMicrophonePermissionVoidUtil(boolean granted) {
         if (granted) {
             try {
                 Speech.getInstance().stopTextToSpeech();

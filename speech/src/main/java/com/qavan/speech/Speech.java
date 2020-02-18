@@ -10,6 +10,7 @@ import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -18,6 +19,16 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+
+import static android.speech.SpeechRecognizer.ERROR_AUDIO;
+import static android.speech.SpeechRecognizer.ERROR_CLIENT;
+import static android.speech.SpeechRecognizer.ERROR_INSUFFICIENT_PERMISSIONS;
+import static android.speech.SpeechRecognizer.ERROR_NETWORK;
+import static android.speech.SpeechRecognizer.ERROR_NETWORK_TIMEOUT;
+import static android.speech.SpeechRecognizer.ERROR_NO_MATCH;
+import static android.speech.SpeechRecognizer.ERROR_RECOGNIZER_BUSY;
+import static android.speech.SpeechRecognizer.ERROR_SERVER;
+import static android.speech.SpeechRecognizer.ERROR_SPEECH_TIMEOUT;
 
 /**
  * Helper class to easily work with Android speech recognition.
@@ -168,7 +179,44 @@ public class Speech {
 
         @Override
         public void onError(final int code) {
-            Logger.error(LOG_TAG, "Speech recognition error", new SpeechRecognitionException(code));
+            switch (code) {
+                case ERROR_AUDIO: {
+                    Logger.error(LOG_TAG, "Audio recording error.", new SpeechRecognitionException(code));
+                    Toast.makeText(mContext, "Audio recording error", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_CLIENT: {
+                    Logger.error(LOG_TAG, "Other client side errors.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "Other client side errors", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_INSUFFICIENT_PERMISSIONS: {
+                    Logger.error(LOG_TAG, "Insufficient permissions", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "Insufficient permissions", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_NETWORK: {
+                    Logger.error(LOG_TAG, "Other network related errors.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "Other network related errors", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_NETWORK_TIMEOUT: {
+                    Logger.error(LOG_TAG, "Network operation timed out.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "Network operation timed out", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_NO_MATCH: {
+                    Logger.error(LOG_TAG, "No recognition result matched.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "No recognition result matched", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_RECOGNIZER_BUSY: {
+                    Logger.error(LOG_TAG, "RecognitionService busy.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "RecognitionService busy", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_SERVER: {
+                    Logger.error(LOG_TAG, "Server sends error status.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "Server sends error status", Toast.LENGTH_SHORT).show();
+                }
+                case ERROR_SPEECH_TIMEOUT: {
+                    Logger.error(LOG_TAG, "No speech input.", new SpeechRecognitionException(code));
+//                    Toast.makeText(mContext, "No speech input", Toast.LENGTH_SHORT).show();
+                }
+            }
             returnPartialResultsAndRecreateSpeechRecognizer();
         }
 

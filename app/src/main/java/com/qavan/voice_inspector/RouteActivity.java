@@ -1,6 +1,5 @@
 package com.qavan.voice_inspector;
 
-
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ComponentName;
@@ -64,6 +63,8 @@ public class RouteActivity extends Activity {
                 new Intent().setComponent(new ComponentName("com.vivo.permissionmanager", "com.vivo.permissionmanager.activity.BgStartUpManagerActivity")),
                 new Intent().setComponent(new ComponentName("com.asus.mobilemanager", "com.asus.mobilemanager.entry.FunctionActivity")).setData(Uri.parse("mobilemanager://function/entry/AutoStart"))
         };
+
+        //TODO ADD CHECK OF AUTO START IS ENABLE
 
         for (Intent intent : autoStartIntents) {
             if (getPackageManager().resolveActivity(intent, PackageManager.MATCH_DEFAULT_ONLY) != null) {
