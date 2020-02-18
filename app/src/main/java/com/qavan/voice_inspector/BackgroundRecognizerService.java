@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.os.IBinder;
+import android.speech.tts.UtteranceProgressListener;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,6 +39,9 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
     private ArrayList<String> KEY_WORDS_SEARCH_BY_ROOM;
     private String KEY_WORD_UPDATE;
 
+    private TextToSpeechUtil tts;
+    private AudioManager amAudioManager;
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         try {
@@ -47,7 +51,8 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+        tts = new TextToSpeechUtil(this, (float) 1.7d);
+        amAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         Speech.init(this);
         delegate = this;
         Speech.getInstance().setListener(this);
@@ -101,6 +106,10 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
                     triggeredKeyWord = true;
                     Log.d("ON_SPEECH_RESULT", "ACTIVATED");
                 } else if (KEY_WORDS_SEARCH_BY_NUMBER.contains(result)) {
+                    Speech.getInstance().stopListening();
+                    unMuteBeepSoundOfRecorder();
+                    tts.speak("скажите номер");
+//                    muteBeepSoundOfRecorder();
                     //TODO ADD SEARCH BY NUMBER OF COUNTER WITH PROCESSING OF SIMILAR RESULT
                     ticks = 0;
                     Log.d("ON_SPEECH_RESULT", "KEY_WORD_SEARCH_BY_NUMBER");
@@ -143,11 +152,11 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
             e.printStackTrace();
         }
         if (Speech.getInstance().isListening()) {
-            muteBeepSoundOfRecorder();
+//            muteBeepSoundOfRecorder();
             Speech.getInstance().stopListening();
         } else {
             RxPermissions.getInstance(this).request(Manifest.permission.RECORD_AUDIO).subscribe(this::checkMicrophonePermissionVoidUtil);
-            muteBeepSoundOfRecorder();
+//            muteBeepSoundOfRecorder();
         }
     }
 
@@ -155,14 +164,14 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
      * Function to remove the beep sound of CARD_RECORD_BUTTON recognizer.
      */
     private void muteBeepSoundOfRecorder() {
-        AudioManager amAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
         if (amAudioManager != null) {
-//            amAudioManager.setStreamMute(AudioManager.STREAM_NOTIFICATION, true);
-//            amAudioManager.setStreamMute(AudioManager.STREAM_ALARM, true);
             amAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, true);
-//            amAudioManager.setStreamMute(AudioManager.STREAM_SYSTEM, true);
-//            amAudioManager.setStreamMute(AudioManager.STREAM_RING, true);
+        }
+    }
+
+    private void unMuteBeepSoundOfRecorder() {
+        if (amAudioManager != null) {
+            amAudioManager.setStreamMute(AudioManager.STREAM_MUSIC, false);
         }
     }
 
@@ -174,7 +183,7 @@ public class BackgroundRecognizerService extends Service implements SpeechDelega
 
         AlarmManager amAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert amAlarmManager != null;
-        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 3000, service);
+//        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 3000, service);
         super.onTaskRemoved(rootIntent);
     }
 
