@@ -1,2 +1,6 @@
 R_DEF: Internal format may change without notice
 local
+array KEY_WORDS_SEARCH_BY_ID
+array KEY_WORDS_SEARCH_BY_ROOM
+array KEY_WORD_SEARCH_BY_NUMBER
+string KEY_WORD_UPDATE

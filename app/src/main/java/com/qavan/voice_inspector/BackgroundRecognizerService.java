@@ -19,6 +19,11 @@ import java.util.List;
 import java.util.Random;
 
 public class BackgroundRecognizerService extends Service implements Speech.stopDueToDelay {
+    /**
+     * Имя сервиса
+     */
+    public static final String SERVICE_NAME = "com.qavan.voice_inspector.BackgroundRecognizerService";
+
     private ActivateCommand acActivateCommand;
 
     @Override

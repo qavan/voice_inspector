@@ -16,7 +16,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name="com.qavan.voice_inspector.BackgroundRecognizerService"></service>
+
+        <service android:name="com.qavan.voice_inspector.BackgroundRecognizerService" />
     </application>
 
 </manifest>
