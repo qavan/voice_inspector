@@ -1,22 +1,61 @@
 package com.qavan.voice_inspector.command;
 
-public abstract class ActivateCommand implements IActivateCommand {
 
+import android.content.Context;
+import android.media.AudioManager;
+
+import com.qavan.speech.SimpleException;
+import com.qavan.speech.Speech;
+import com.qavan.speech.SpeechDelegate;
+import com.qavan.voice_inspector.R;
+
+import java.util.Locale;
+
+
+public abstract class ActivateCommand implements IActivateCommand, SpeechDelegate, Speech.stopDueToDelay {
     private boolean mIsActivated = false;
+    private Context mContext;
+    private SpeechDelegate mSpeechDelegate;
+    private AudioManager amAudioManager;
 
-    private final String COMMAND_ACTIVATE = "activate";
-    private final String COMMAND_DEACTIVATE = "deactivate";
+    private String COMMAND_ACTIVATE;
+    private String COMMAND_DEACTIVATE;
 
-    public ActivateCommand() {
-        // Нужно инициализировать службу speech
-    }
+    public ActivateCommand(Context context) {
+        mContext = context;
 
-    public boolean isActivated() {
-        return mIsActivated;
+        amAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
+
+        COMMAND_ACTIVATE = mContext.getResources().getString(R.string.KEY_WORD_ACTIVATION);
+        COMMAND_DEACTIVATE = mContext.getResources().getString(R.string.KEY_WORD_DEACTIVATION);
+
+        Speech.init(mContext);
+
+        Speech.getInstance().setTextToSpeechRate(1.7f);
+        Speech.getInstance().setLocale(Locale.getDefault());
+        Speech.getInstance().setGetPartialResults(false);
+
+        mSpeechDelegate = this;
+
+        Speech.getInstance().setListener(this);
+
+        if (Speech.getInstance().isListening()) {
+            Speech.getInstance().stopListening();
+//            muteBeepSoundOfRecorder();
+        } else {
+            System.setProperty("rx.unsafe-disable", "True");
+//            RxPermissions.getInstance(mContext).request(Manifest.permission.RECORD_AUDIO).subscribe(BackgroundRecognizerService.checkMicrophonePermissionVoidUtil);
+//            muteBeepSoundOfRecorder();
+        }
+        try {
+            Speech.getInstance().startListening(mSpeechDelegate);
+        } catch (SimpleException.SpeechRecognitionNotAvailable | SimpleException.GoogleVoiceTypingDisabledException speechRecognitionNotAvailable) {
+            speechRecognitionNotAvailable.printStackTrace();
+        }
     }
 
     @Override
-    public void applyCommand(String[] textCommands) {
+    public void applyCommand(String[] textCommands) throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException {
         // тут нужно обработать textCommands и вызвать либо onActivate, либо onDeactivate
         String command = textCommands[0].toLowerCase();
 
@@ -30,7 +69,7 @@ public abstract class ActivateCommand implements IActivateCommand {
         }
     }
 
-    private void activate() {
+    private void activate() throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException {
         onActivated();
         mIsActivated = true;
     }
@@ -45,5 +84,20 @@ public abstract class ActivateCommand implements IActivateCommand {
             deActivate();
         }
         // тут выполняем еще что-то
+    }
+
+    @Override
+    public abstract void onSpecifiedCommandPronounced(String event);
+
+    public boolean isActivated() {
+        return mIsActivated;
+    }
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public SpeechDelegate getDelegate() {
+        return mSpeechDelegate;
     }
 }

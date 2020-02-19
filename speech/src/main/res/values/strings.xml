@@ -1,5 +1,4 @@
 <resources>
-    <string name="KEY_WORD_ACTIVATION">помогатор</string>
 
     <string-array name="KEY_WORD_SEARCH_BY_NUMBER">
         <item>поиск прибор</item>

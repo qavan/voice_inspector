@@ -1,5 +1,7 @@
 package com.qavan.voice_inspector.command;
 
+import com.qavan.speech.SimpleException;
+
 public interface ICommand {
     /**
      * команды активации
@@ -16,7 +18,7 @@ public interface ICommand {
      *
      * @param textCommands команды
      */
-    void applyCommand(String[] textCommands);
+    void applyCommand(String[] textCommands) throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException;
 
     /**
      * Обработчик ошибок распознования

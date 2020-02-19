@@ -33,4 +33,8 @@
     <string name="ROUT_CARD_STATUS_WAIT">Ожидает выполнения</string>
     <string name="ROUT_CARD_STATUS_DEAD">Отменен</string>
     <string name="ROUT_TITLE">Маршрутный лист</string>
+
+
+    <string name="KEY_WORD_ACTIVATION">старт</string>
+    <string name="KEY_WORD_DEACTIVATION">стоп</string>
 </resources>

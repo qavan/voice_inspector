@@ -10,6 +10,7 @@ import android.speech.SpeechRecognizer;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.util.Log;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class Speech {
     private TextToSpeech mTextToSpeech;
     private final Map<String, TextToSpeechProgressListener.TextToSpeechCallback> mTtsCallbacks = new HashMap<>();
     private Locale mLocale = Locale.getDefault();
-    private float mTtsRate = 1.0f;
+    private float mTtsRate = 1.7f;
     private float mTtsPitch = 1.0f;
     private int mTtsQueueMode = TextToSpeech.QUEUE_FLUSH;
     private long mStopListeningDelayInMs = 10000;
@@ -154,10 +155,10 @@ public class Speech {
 
             final List<String> results = bundle.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
 
-            final String result;
+            final String[] result;
 
             if (results != null && !results.isEmpty() && results.get(0) != null && !results.get(0).isEmpty()) {
-                result = results.get(0);
+                result = results.toArray(new String[0]);
             } else {
                 Logger.info(Speech.class.getSimpleName(), "No speech results, getting partial");
                 result = getPartialResultsAsString();
@@ -167,7 +168,7 @@ public class Speech {
 
             try {
                 if (mDelegate != null)
-                    mDelegate.onSpeechResult(result.trim());
+                    mDelegate.onSpeechResult(results.toArray(new String[0]));
             } catch (final Throwable exc) {
                 Logger.error(Speech.class.getSimpleName(), "Unhandled exception in delegate onSpeechResult", exc);
             }
@@ -394,7 +395,7 @@ public class Speech {
      * @throws SimpleException.GoogleVoiceTypingDisabledException when google CARD_RECORD_BUTTON typing is disabled on the device
      */
     public void startListening(final String progressView, final SpeechDelegate delegate)
-            throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException, SimpleException.GoogleVoiceTypingDisabledException {
+            throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException {
         if (mIsListening) return;
 
         if (mSpeechRecognizer == null)
@@ -475,17 +476,14 @@ public class Speech {
         returnPartialResultsAndRecreateSpeechRecognizer();
     }
 
-    private String getPartialResultsAsString() {
-        final StringBuilder out = new StringBuilder("");
+    private String[] getPartialResultsAsString() {
+//        final StringBuilder out = new StringBuilder("");
+        final String[] out = mPartialData.toArray(new String[0]);
+//
+//        if (mUnstableData != null && !mUnstableData.isEmpty())
+//            out.append(mUnstableData);
 
-        for (final String partial : mPartialData) {
-            out.append(partial).append(" ");
-        }
-
-        if (mUnstableData != null && !mUnstableData.isEmpty())
-            out.append(mUnstableData);
-
-        return out.toString().trim();
+        return out;
     }
 
     private void returnPartialResultsAndRecreateSpeechRecognizer() {

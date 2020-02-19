@@ -64,6 +64,12 @@ public class TextToSpeechUtil {
         }
     }
 
+    public void setOnUtteranceProgressListener(UtteranceProgressListener utteranceProgressListener) {
+        if (utteranceProgressListener != null) {
+            mTextToSpeech.setOnUtteranceProgressListener(utteranceProgressListener);
+        }
+    }
+
     public interface TextToSpeechListener {
         void onError(String message, int code);
     }

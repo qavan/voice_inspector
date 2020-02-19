@@ -7,17 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.ToggleButton;
-
-import androidx.cardview.widget.CardView;
 
 import com.afollestad.materialdialogs.MaterialDialog.Builder;
 import com.afollestad.materialdialogs.Theme;
-
-import static android.widget.LinearLayout.*;
 
 public class RouteActivity extends Activity {
 
@@ -29,6 +22,9 @@ public class RouteActivity extends Activity {
         setContentView(R.layout.activity_route);
 
         cbService = findViewById(R.id.idCheckBoxService);
+        if (checkServiceRunning()) {
+            cbService.setText(getString(R.string.stop_service_after));
+        }
         enableAutoStart();
         if (checkServiceRunning()) {
             cbService.setText(getString(R.string.stop_service_after));
@@ -99,80 +95,6 @@ public class RouteActivity extends Activity {
             }
         }
         return false;
-    }
-
-    public void addCard(View view) {
-        CardView exampleCard = findViewById(R.id.cardViewProcess);
-
-        CardView newCardView = new CardView(view.getContext());
-        newCardView.setLayoutParams(exampleCard.getLayoutParams());
-        newCardView.setRadius(exampleCard.getRadius());
-
-        TextView newCardStatus = new TextView(view.getContext());
-        newCardStatus.setEms(10);
-        newCardStatus.setAllCaps(true);
-        TextView CS = findViewById(R.id.idCardStatus);
-        newCardStatus.setLayoutParams(CS.getLayoutParams());
-        newCardStatus.setFontFeatureSettings(CS.getFontFeatureSettings());
-        newCardStatus.setText(CS.getText());
-        newCardStatus.setTypeface(CS.getTypeface());
-        newCardStatus.setTextColor(CS.getCurrentTextColor());
-        newCardStatus.setTextSize(12);
-        newCardStatus.setText(R.string.ROUT_CARD_STATUS_PROCESS);
-
-        TextView newCardTitle = new TextView(view.getContext());
-        TextView CT = findViewById(R.id.idCardTitle);
-        newCardTitle.setLayoutParams(CT.getLayoutParams());
-        newCardTitle.setFontFeatureSettings(CT.getFontFeatureSettings());
-        newCardTitle.setText(CT.getText());
-        newCardTitle.setTypeface(CT.getTypeface());
-        newCardTitle.setTextColor(CT.getCurrentTextColor());
-        newCardTitle.setTextSize(18);
-        newCardTitle.setText(R.string.ROUT_CARD_TITLE_PLACEHOLDER);
-
-        TextView newCardAddress = new TextView(view.getContext());
-        newCardAddress.setLayoutParams(findViewById(R.id.idCardAddress).getLayoutParams());
-        newCardAddress.setMaxLines(2);
-        newCardAddress.setMinLines(2);
-        newCardAddress.setText(getResources().getString(R.string.ROUT_CARD_ADDRESS_PLACEHOLDER_FULL));
-        newCardAddress.setTextColor(getResources().getColor(R.color.colorBlackPrimary));
-        newCardAddress.setTextSize(14);
-        newCardAddress.setText(R.string.ROUT_CARD_ADDRESS_PLACEHOLDER_FULL);
-
-        TextView newCardDate = new TextView(view.getContext());
-        newCardDate.setLayoutParams(findViewById(R.id.idCardDate).getLayoutParams());
-        newCardDate.setText(getResources().getString(R.string.ROUT_CARD_DATE_PLACEHOLDER));
-        newCardDate.setTextColor(getResources().getColor(R.color.colorBlackPrimaryLightOP45));
-        newCardDate.setTextSize(14);
-        newCardDate.setText(R.string.ROUT_CARD_DATE_PLACEHOLDER);
-
-        TextView newCardWtf = new TextView(view.getContext());
-        newCardWtf.setLayoutParams(findViewById(R.id.idCardWtf).getLayoutParams());
-        newCardWtf.setText(getResources().getString(R.string.ROUT_CARD_PERSON_PLACEHOLDER));
-        newCardWtf.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-        newCardWtf.setTextColor(getResources().getColor(R.color.colorBlackPrimaryLightOP45));
-        newCardWtf.setTextSize(14);
-        newCardWtf.setText(R.string.ROUT_CARD_PERSON_PLACEHOLDER);
-
-        LinearLayout newCardBottom = new LinearLayout(view.getContext());
-        newCardBottom.setOrientation(HORIZONTAL);
-        newCardBottom.setLayoutParams(findViewById(R.id.idCardBottom).getLayoutParams());
-        newCardBottom.addView(newCardDate);
-        newCardBottom.addView(newCardWtf);
-
-        LinearLayout newCardLL = new LinearLayout(view.getContext());
-        newCardLL.setLayoutParams(findViewById(R.id.idCardLL).getLayoutParams());
-        newCardLL.setOrientation(VERTICAL);
-        newCardLL.setGravity(5);
-
-        newCardLL.addView(newCardStatus);
-        newCardLL.addView(newCardTitle);
-        newCardLL.addView(newCardAddress);
-        newCardLL.addView(newCardBottom);
-
-        newCardView.addView(newCardLL);
-        LinearLayout linLay = findViewById(R.id.cardsLinearLayout);
-        linLay.addView(newCardView);
     }
 
 }

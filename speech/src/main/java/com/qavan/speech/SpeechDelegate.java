@@ -10,5 +10,5 @@ public interface SpeechDelegate {
 
     void onSpeechPartialResults(List<String> results);
 
-    void onSpeechResult(String result);
+    void onSpeechResult(String[] result) throws SimpleException.SpeechRecognitionNotAvailable, SimpleException.GoogleVoiceTypingDisabledException;
 }
