@@ -88,7 +88,6 @@ public class BackgroundRecognizerService extends Service implements Speech.stopD
 
             @Override
             public void onErrorCommand(int type, String[] textCommands) {
-//                Speech.getInstance().say("Команда не распознана");
             }
         };
 
@@ -97,7 +96,6 @@ public class BackgroundRecognizerService extends Service implements Speech.stopD
 
     @Override
     public IBinder onBind(Intent intent) {
-//        NOTTODO for communication return IBinder implementation
         return null;
     }
 
@@ -112,18 +110,25 @@ public class BackgroundRecognizerService extends Service implements Speech.stopD
         }
     }
 
+    /**
+     * Автоматический перезапуск службы в случае завершения
+     *
+     * @param rootIntent
+     */
     @Override
     public void onTaskRemoved(Intent rootIntent) {
-//        Restarting the service if it is removed.
         PendingIntent service = PendingIntent.getService(getApplicationContext(), new Random().nextInt(),
                 new Intent(getApplicationContext(), BackgroundRecognizerService.class), PendingIntent.FLAG_ONE_SHOT);
 
         AlarmManager amAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         assert amAlarmManager != null;
-        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 3000, service);
+        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 300, service);
         super.onTaskRemoved(rootIntent);
     }
 
+
+    //    @Override
+//    public void on
     public void checkMicrophonePermissionVoidUtil(boolean granted) {
         if (granted) {
             try {

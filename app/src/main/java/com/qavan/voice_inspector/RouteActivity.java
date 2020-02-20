@@ -1,16 +1,11 @@
 package com.qavan.voice_inspector;
 
 import android.app.Activity;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ToggleButton;
 
-import com.afollestad.materialdialogs.MaterialDialog.Builder;
-import com.afollestad.materialdialogs.Theme;
 
 public class RouteActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
 
@@ -30,7 +25,7 @@ public class RouteActivity extends Activity implements CompoundButton.OnCheckedC
         super.onStart();
 
         if (Utils.checkServiceRunning(this, BackgroundRecognizerService.SERVICE_NAME)) {
-            mToggleButton.setText(getString(R.string.stop_service_after));
+            mToggleButton.setChecked(true);
         }
     }
 
