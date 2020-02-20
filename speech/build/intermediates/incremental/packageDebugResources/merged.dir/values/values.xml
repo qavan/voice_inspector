@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="KEY_WORDS_SEARCH_BY_ID">
+        <item>поиск cчет</item>
+        <item>поиск по cчет</item>
+        <item>поиск по cчету</item>
+        <item>поиск cчёт</item>
+        <item>поиск по cчёт</item>
+        <item>поиск по cчёту</item>
+    </string-array>
+    <string-array name="KEY_WORDS_SEARCH_BY_ROOM">
+        <item>поиск квартира</item>
+        <item>поиск по квартира</item>
+        <item>поиск по квартире</item>
+    </string-array>
+    <string-array name="KEY_WORD_SEARCH_BY_NUMBER">
+        <item>поиск прибор</item>
+        <item>поиск по прибор</item>
+        <item>поиск по прибору</item>
+    </string-array>
+    <string name="KEY_WORD_UPDATE">обновить</string>
+</resources>
