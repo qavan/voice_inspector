@@ -2,10 +2,7 @@ package com.qavan.voice_inspector;
 
 
 import android.Manifest;
-import android.app.AlarmManager;
-import android.app.PendingIntent;
 import android.app.Service;
-import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 import android.widget.Toast;
@@ -16,7 +13,6 @@ import com.qavan.voice_inspector.command.ActivateCommand;
 import com.tbruyelle.rxpermissions.RxPermissions;
 
 import java.util.List;
-import java.util.Random;
 
 public class BackgroundRecognizerService extends Service implements Speech.stopDueToDelay {
     /**
@@ -110,25 +106,6 @@ public class BackgroundRecognizerService extends Service implements Speech.stopD
         }
     }
 
-    /**
-     * Автоматический перезапуск службы в случае завершения
-     *
-     * @param rootIntent
-     */
-    @Override
-    public void onTaskRemoved(Intent rootIntent) {
-        PendingIntent service = PendingIntent.getService(getApplicationContext(), new Random().nextInt(),
-                new Intent(getApplicationContext(), BackgroundRecognizerService.class), PendingIntent.FLAG_ONE_SHOT);
-
-        AlarmManager amAlarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        assert amAlarmManager != null;
-        amAlarmManager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, 300, service);
-        super.onTaskRemoved(rootIntent);
-    }
-
-
-    //    @Override
-//    public void on
     public void checkMicrophonePermissionVoidUtil(boolean granted) {
         if (granted) {
             try {
