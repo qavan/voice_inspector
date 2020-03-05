@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/idListItem"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_marginBottom="0.2dp"
+    android:layout_marginStart="0.7dp"
+    android:layout_marginEnd="0.7dp"
+    android:background="@drawable/item_shape"
+    android:orientation="vertical"
+    android:paddingStart="4dp"
+    android:paddingEnd="0dp">
+
+    <TextView
+        android:id="@+id/idListItemStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="0dp"
+        android:elegantTextHeight="false"
+        android:ems="10"
+        android:fontFamily="@font/roboto"
+        android:letterSpacing="0"
+        android:text="@string/ROUT_CARD_STATUS_PROCESS"
+        android:textAllCaps="true"
+        android:textColor="@color/addGreen"
+        android:textSize="12sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/idListItemTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:text="@string/ROUT_CARD_TITLE_PLACEHOLDER"
+        android:textColor="@color/colorBlackPrimary"
+        android:textSize="14sp"
+        android:textStyle="normal|bold" />
+
+    <TextView
+        android:id="@+id/idListItemAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:maxLines="2"
+        android:minLines="2"
+        android:text="@string/ROUT_CARD_ADDRESS_PLACEHOLDER_FULL"
+        android:textColor="@color/colorBlackPrimary"
+        android:textSize="12sp"
+        android:textStyle="normal" />
+
+    <LinearLayout
+        android:id="@+id/listItemHorizontalLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/idListItemExpireDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:text="@string/ROUT_CARD_DATE_PLACEHOLDER"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/idListItemClient"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:text="@string/ROUT_CARD_PERSON_PLACEHOLDER"
+            android:textSize="12sp" />
+    </LinearLayout>
+
+</LinearLayout>

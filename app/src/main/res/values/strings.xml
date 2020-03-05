@@ -1,12 +1,39 @@
 <resources>
-    <string name="app_name">Speech</string>
-    <string name="permission_required">Please grant the permission to use the microphone</string>
-    <string name="start_service">START SERVICE</string>
-    <string name="stop_service">STOP SERVICE</string>
+    <string name="app_name">vi_db</string>
+    <string name="load_tasks">IN</string>
+    <string name="unload_tasks">OUT</string>
+    <string name="empty">1</string>
 
-    <string name="voice_recognizer_is_active">Voice Recognizer is active...</string>
-    <string name="ask_permission">Please allow Speech to always run in the background,else our services can\'t be accessed when you are in distress</string>
-    <string name="allow">ALLOW</string>
-    <string name="enable_autostart">Enable AutoStart</string>
+    <string name="CARD_INDICATOR_HINT">Введите значение</string>
+    <string name="CARD_RECORD_BUTTON">записать</string>
+    <string name="CARD_TITLE">текстовый прием показаний</string>
+    <string name="CARD_ELECTRICITY">Электроэнергия</string>
+    <string name="CARD_HOT_WATER">ГВС</string>
+    <string name="CARD_COLD_WATER">ХВС</string>
+    <string name="CARD_ID">Лицевой счёт\t\t\nНомер\t\t</string>
+    <string name="CARD_INDICATOR_ID">Номер счетчика</string>
+    <string name="CARD_ID_PLACEHOLDER">00000 000000</string>
+    <string name="CARD_INDICATOR_ID_PLACEHOLDER">000000000000</string>
+    <string name="CARD_COMMON_PLACEHOLDER">Тут должно быть значение</string>
+    <string name="CARD_ADDRESS">Адрес</string>
+
+    <string name="ROUT_CARD_STATUS_PROCESS">взято в работу</string>
+    <string name="ROUT_CARD_TITLE_PLACEHOLDER">Прием показаний от 01.01.1970 00:00</string>
+    <string name="ROUT_CARD_ADDRESS_PLACEHOLDER_FULL">Тут должен быть адрес в две строки, просто верь этой надписи.\nМолодец, поверил!)</string>
+    <string name="ROUT_CARD_DATE_PLACEHOLDER">До 01.01.1970</string>
+    <string name="ROUT_CARD_PREV_DATE_PLACEHOLDER">Предыдущее от 01.01.1970</string>
+    <string name="ROUT_CARD_CURRENT_DATE_PLACEHOLDER">\t\t\t\t\tТекущее от 01.01.1970</string>
+    <string name="ROUT_CARD_PERSON_PLACEHOLDER">Клиент</string>
+    <string name="ROUT_CARD_STATUS_WAIT">Ожидает выполнения</string>
+    <string name="ROUT_CARD_STATUS_DEAD">Отменен</string>
+    <string name="ROUT_TITLE">Маршрутный лист</string>
+    <string name="COMMON_TEXT_PLACEHOLDER">PLACEHOLDER</string>
+    <string name="COMMON_CURRENT_VALUE">Текущее значение</string>
+    <string name="ROUT_CARD_STATUS_DONE">Завершено</string>
+
+    <string name="permission_required">Пожалуйста, предоставьте приложению права на использование микрофона…</string>
+    <string name="start_service">1</string>
+    <string name="stop_service">0</string>
+
     <string name="my_service_name">com.sac.speechdemo.MyService</string>
 </resources>

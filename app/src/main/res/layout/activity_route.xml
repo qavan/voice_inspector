@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/routeLinearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#E8F0F7"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/textViewTitleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="2dp"
+        android:gravity="bottom|center_vertical"
+        android:paddingStart="5dp"
+        android:paddingEnd="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textViewTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:gravity="start"
+                android:paddingStart="18dp"
+                android:paddingEnd="0dp"
+                android:text="@string/ROUT_TITLE"
+                android:textAlignment="gravity"
+                android:textAllCaps="true"
+                android:textColor="@color/colorBlackPrimaryNotSoLightOP50"
+                android:textDirection="inherit"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/idSyncRPCServerToClientButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.4"
+                    android:text="@string/load_tasks"
+                    android:textColor="@color/colorBlackPrimary"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/idSyncClientToRPCServerButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.4"
+                    android:text="@string/unload_tasks"
+                    android:textColor="@color/colorBlackPrimary"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/idStartServiceButton"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="0.2"
+                    android:text="@string/empty"
+                    android:textColor="@color/colorBlackPrimary"
+                    android:textSize="12sp" />
+            </LinearLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        tools:itemCount="3"
+        tools:listitem="@layout/list_item" />
+
+</LinearLayout>
