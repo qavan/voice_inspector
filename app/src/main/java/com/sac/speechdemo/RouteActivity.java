@@ -17,9 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.speechrecognizationasservice.R;
+import com.sac.speech.GoogleVoiceTypingDisabledException;
+import com.sac.speech.Speech;
+import com.sac.speech.SpeechRecognitionNotAvailable;
+import com.sac.speechdemo.command.ActivateCommand;
+import com.sac.speechdemo.command.MainCommand;
 import com.sac.speechdemo.rpc.AsyncDatabaseClientToRPCServer;
 import com.sac.speechdemo.rpc.AsyncDatabaseRPCServerToClient;
-import com.sac.speechdemo.util.Utils;
+import com.sac.speechdemo.util.Util;
 
 import org.greenrobot.greendao.query.Query;
 
@@ -65,9 +70,9 @@ public class RouteActivity extends Activity {
         mTaskDao = daoSession.getTaskDao();
         mTasksQuery = mTaskDao.queryBuilder().orderAsc(TaskDao.Properties.TaskId).build();
 
-        Utils.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
+        Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
 
-        if (Utils.checkServiceRunning(this, getString(R.string.my_service_name))) {
+        if (Util.checkServiceRunning(this, getString(R.string.my_service_name))) {
             btStartService.setText(getString(R.string.stop_service));
         }
     }
@@ -75,8 +80,8 @@ public class RouteActivity extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
-        Utils.getPermission(this, getApplicationContext(), Manifest.permission.INTERNET);
-        Utils.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
+        Util.getPermission(this, getApplicationContext(), Manifest.permission.INTERNET);
+        Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
     }
 
     @Override
@@ -88,8 +93,8 @@ public class RouteActivity extends Activity {
             ActivityCompat.requestPermissions(this, permissions, REQUEST_PERMISSIONS);
         }
 
-        Utils.getPermission(this, getApplicationContext(), Manifest.permission.INTERNET);
-        Utils.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
+        Util.getPermission(this, getApplicationContext(), Manifest.permission.INTERNET);
+        Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
     }
 
     @Override
@@ -118,7 +123,7 @@ public class RouteActivity extends Activity {
     Button.OnClickListener asyncLoadFromServer = v -> {
         AsyncDatabaseRPCServerToClient aTask = new AsyncDatabaseRPCServerToClient();
         aTask.execute("");
-        Utils.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
+        Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
     };
 
     Button.OnClickListener asyncUploadToServer = v -> {

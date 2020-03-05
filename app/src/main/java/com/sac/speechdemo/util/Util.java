@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Utils {
+public class Util {
 
     /**
      * Проверка на запуск фоновой службы

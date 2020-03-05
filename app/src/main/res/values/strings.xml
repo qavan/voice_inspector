@@ -36,4 +36,6 @@
     <string name="stop_service">0</string>
 
     <string name="my_service_name">com.sac.speechdemo.MyService</string>
+    <string name="KEY_WORD_ACTIVATION">проверка</string>
+    <string name="KEY_WORD_DEACTIVATION">стоп</string>
 </resources>

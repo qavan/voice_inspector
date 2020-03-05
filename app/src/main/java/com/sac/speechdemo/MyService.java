@@ -35,6 +35,7 @@ public class MyService extends Service implements SpeechDelegate, Speech.stopDue
         audioStreams = new AudioUtil(this);
 
         Speech.init(this);
+        Speech.getInstance().stopListening();
         Speech.getInstance().setListener(this);
 
         restartListener();
@@ -110,7 +111,7 @@ public class MyService extends Service implements SpeechDelegate, Speech.stopDue
             if (isRecordAudioPermission()) {
                 try {
                     Speech.getInstance().stopTextToSpeech();
-                    Speech.getInstance().startListening(null, this);
+                    Speech.getInstance().startListening(this);
                 } catch (SpeechRecognitionNotAvailable ignored) {
 
 
