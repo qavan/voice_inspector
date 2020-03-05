@@ -36,7 +36,7 @@ public class DelayedOperation {
         mContext = context;
         mTag = tag;
         mDelay = delayInMilliseconds;
-        Logger.debug(LOG_TAG, "created delayed operation with tag: " + mTag);
+//        Logger.debug(LOG_TAG, "created delayed operation with tag: " + mTag);
     }
 
     public void start(final Operation operation) {
@@ -44,7 +44,7 @@ public class DelayedOperation {
             throw new IllegalArgumentException("The operation must be defined!");
         }
 
-        Logger.debug(LOG_TAG, "starting delayed operation with tag: " + mTag);
+//        Logger.debug(LOG_TAG, "starting delayed operation with tag: " + mTag);
         mOperation = operation;
         cancel();
         started = true;
@@ -56,7 +56,7 @@ public class DelayedOperation {
 
         if (mTimer != null) mTimer.cancel();
 
-        Logger.debug(LOG_TAG, "resetting delayed operation with tag: " + mTag);
+//        Logger.debug(LOG_TAG, "resetting delayed operation with tag: " + mTag);
         mTimer = new Timer();
         mTimer.schedule(new TimerTask() {
             @Override
@@ -77,7 +77,7 @@ public class DelayedOperation {
 
     public void cancel() {
         if (mTimer != null) {
-            Logger.debug(LOG_TAG, "cancelled delayed operation with tag: " + mTag);
+//            Logger.debug(LOG_TAG, "cancelled delayed operation with tag: " + mTag);
             mTimer.cancel();
             mTimer = null;
         }
