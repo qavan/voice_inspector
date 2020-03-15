@@ -66,10 +66,10 @@ public class TaskAdapter extends RecyclerView.Adapter {
         Boolean taskStatus = task.getB_done();
         if (taskStatus) {
             TaskViewHolder.status.setText(R.string.ROUT_CARD_STATUS_DONE);
-            TaskViewHolder.status.setTextColor(((RouteActivity) mActivity).getContext().getResources().getColor(R.color.addGreen));
+            TaskViewHolder.status.setTextColor(RouteActivity.getContext().getResources().getColor(R.color.addGreen));
         } else {
             TaskViewHolder.status.setText(R.string.ROUT_CARD_STATUS_PROCESS);
-            TaskViewHolder.status.setTextColor(((RouteActivity) mActivity).getContext().getResources().getColor(R.color.addOrange));
+            TaskViewHolder.status.setTextColor(RouteActivity.getContext().getResources().getColor(R.color.addOrange));
         }
 
         TaskViewHolder.title.setText("Приём показаний");

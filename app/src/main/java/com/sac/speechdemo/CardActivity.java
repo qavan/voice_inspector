@@ -101,6 +101,7 @@ public class CardActivity extends Activity implements Button.OnClickListener {
             mTask.setD_current_date(Util.dateCombine(Util.getCurrentDate().toString()));
             mTask.setN_prev_value(mCurrentValue);
             mTask.setN_current_value(newValue.toString());
+            mTask.setB_done(true);
             mTask.update();
             Log.i(TAG, "Task updated locally" + mId);
             Toast.makeText(this, "Показания записаны", Toast.LENGTH_SHORT).show();
