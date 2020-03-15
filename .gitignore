@@ -1,2 +1,4 @@
 /.gradle/
 /.idea/
+/speech/build/
+/app/build/

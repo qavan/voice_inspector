@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,23 +19,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.user.speechrecognizationasservice.R;
-import com.sac.speech.GoogleVoiceTypingDisabledException;
-import com.sac.speech.Speech;
-import com.sac.speech.SpeechRecognitionNotAvailable;
-import com.sac.speechdemo.command.ActivateCommand;
-import com.sac.speechdemo.command.MainCommand;
 import com.sac.speechdemo.rpc.AsyncDatabaseClientToRPCServer;
 import com.sac.speechdemo.rpc.AsyncDatabaseRPCServerToClient;
 import com.sac.speechdemo.util.Util;
 
 import org.greenrobot.greendao.query.Query;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class RouteActivity extends Activity {
     private static final String TAG = "ROUTE_ACTIVITY";
 
+    private static Context mContext;
     private static List<Task> mTasks;
     private static TaskAdapter mTaskAdapter;
     private static TaskDao mTaskDao;
@@ -49,6 +50,7 @@ public class RouteActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_route);
 
+        mContext = this;
 
         btStartService = findViewById(R.id.idStartServiceButton);
         btStartService.setOnClickListener(serviceOnClick);
@@ -60,6 +62,7 @@ public class RouteActivity extends Activity {
         mRecyclerView = findViewById(R.id.recyclerView);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mTaskAdapter);
+
         final Button mSyncWithServer = findViewById(R.id.idSyncRPCServerToClientButton);
         mSyncWithServer.setOnClickListener(asyncLoadFromServer);
 
@@ -111,29 +114,30 @@ public class RouteActivity extends Activity {
 
 
     Button.OnClickListener serviceOnClick = v -> {
-        if (btStartService.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
-            startService(new Intent(RouteActivity.this, MyService.class));
-            btStartService.setText(getString(R.string.stop_service));
-        } else {
-            stopService(new Intent(RouteActivity.this, MyService.class));
-            btStartService.setText(getString(R.string.start_service));
-        }
+//        if (btStartService.getText().toString().equalsIgnoreCase(getString(R.string.start_service))) {
+//            startService(new Intent(RouteActivity.this, MyService.class));
+//            btStartService.setText(getString(R.string.stop_service));
+//        } else {
+//            stopService(new Intent(RouteActivity.this, MyService.class));
+//            btStartService.setText(getString(R.string.start_service));
+//        }
+        mTaskDao.insert(Util.getEmptyTask());
+        Log.i(TAG, mTasks.toString());
+        Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
     };
 
     Button.OnClickListener asyncLoadFromServer = v -> {
-        AsyncDatabaseRPCServerToClient aTask = new AsyncDatabaseRPCServerToClient();
-        aTask.execute("");
+        new AsyncDatabaseRPCServerToClient().execute("");
         Util.updateTasks(mTasks, mTasksQuery, mTaskAdapter);
     };
 
     Button.OnClickListener asyncUploadToServer = v -> {
-        AsyncDatabaseClientToRPCServer aTask = new AsyncDatabaseClientToRPCServer();
-        aTask.execute(RouteActivity.getTasks());
+        new AsyncDatabaseClientToRPCServer().execute(RouteActivity.getTasks());
     };
 
 
-    public Context getContext() {
-        return getApplicationContext();
+    public static Context getContext() {
+        return mContext;
     }
 
     public static void setTasks(List<Task> tasks) {

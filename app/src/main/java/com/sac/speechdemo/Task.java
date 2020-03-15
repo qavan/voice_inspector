@@ -49,6 +49,17 @@ public class Task {
         this.b_done = Done;
     }
 
+    //TODO THAT ONLY FOR LOCAL TESTS, MUST BE REMOVED WHEN RPC IS GOING UP
+    public Task(String Client, String Address, String ClientId, String PrevDate, String PrevValue, String CurrentDate, String CurrentValue, Boolean Done) {
+        this.c_client = Client;
+        this.c_address = Address;
+        this.c_client_id = ClientId;
+        this.d_prev_date = PrevDate;
+        this.d_current_date = CurrentDate;
+        this.n_prev_value = PrevValue;
+        this.n_current_value = CurrentValue;
+        this.b_done = Done;
+    }
     @Generated(hash = 603453828)
     public Task(Long TaskId, @NotNull String postgreId, @NotNull String c_client,
                 @NotNull String c_address, String c_client_id, String d_prev_date,

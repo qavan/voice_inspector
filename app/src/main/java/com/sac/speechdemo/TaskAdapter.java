@@ -47,7 +47,7 @@ public class TaskAdapter extends RecyclerView.Adapter {
         @Override
         public void onClick(View v) {
             Task task = mTasksDataset.get(getLayoutPosition());
-            Intent intent = new Intent(((RouteActivity) mActivity).getContext(), CardActivity.class);
+            Intent intent = new Intent(RouteActivity.getContext(), CardActivity.class);
             intent.putExtra("id", task.getTaskId());
             mActivity.startActivity(intent);
         }
@@ -74,7 +74,7 @@ public class TaskAdapter extends RecyclerView.Adapter {
 
         TaskViewHolder.title.setText("Приём показаний");
         TaskViewHolder.address.setText(task.getC_address());
-        TaskViewHolder.date.setText(String.format("До %s", Util.getFormattedDateDDMMYY(Util.getJavaMainFormattedDate(task.getD_prev_date()))));
+        TaskViewHolder.date.setText(String.format("Предыдущее от %s", Util.dateCombine(task.getD_prev_date())));
         TaskViewHolder.client.setText(task.getC_client());
     }
 

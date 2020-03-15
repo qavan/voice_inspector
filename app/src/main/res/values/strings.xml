@@ -10,7 +10,7 @@
     <string name="CARD_ELECTRICITY">Электроэнергия</string>
     <string name="CARD_HOT_WATER">ГВС</string>
     <string name="CARD_COLD_WATER">ХВС</string>
-    <string name="CARD_ID">Лицевой счёт\t\t\nНомер\t\t</string>
+    <string name="CARD_ID">Cчёт\\Номер</string>
     <string name="CARD_INDICATOR_ID">Номер счетчика</string>
     <string name="CARD_ID_PLACEHOLDER">00000 000000</string>
     <string name="CARD_INDICATOR_ID_PLACEHOLDER">000000000000</string>
@@ -22,7 +22,7 @@
     <string name="ROUT_CARD_ADDRESS_PLACEHOLDER_FULL">Тут должен быть адрес в две строки, просто верь этой надписи.\nМолодец, поверил!)</string>
     <string name="ROUT_CARD_DATE_PLACEHOLDER">До 01.01.1970</string>
     <string name="ROUT_CARD_PREV_DATE_PLACEHOLDER">Предыдущее от 01.01.1970</string>
-    <string name="ROUT_CARD_CURRENT_DATE_PLACEHOLDER">\t\t\t\t\tТекущее от 01.01.1970</string>
+    <string name="ROUT_CARD_CURRENT_DATE_PLACEHOLDER">Текущее от 01.01.1970</string>
     <string name="ROUT_CARD_PERSON_PLACEHOLDER">Клиент</string>
     <string name="ROUT_CARD_STATUS_WAIT">Ожидает выполнения</string>
     <string name="ROUT_CARD_STATUS_DEAD">Отменен</string>
@@ -38,4 +38,6 @@
     <string name="my_service_name">com.sac.speechdemo.MyService</string>
     <string name="KEY_WORD_ACTIVATION">проверка</string>
     <string name="KEY_WORD_DEACTIVATION">стоп</string>
+    <string name="NEW_01_01_1970">Новое от 01.01.1970</string>
+    <string name="COMMON_NEW_VALUE">Новое значение</string>
 </resources>
