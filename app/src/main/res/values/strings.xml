@@ -36,8 +36,30 @@
     <string name="stop_service">0</string>
 
     <string name="my_service_name">com.sac.speechdemo.MyService</string>
-    <string name="KEY_WORD_ACTIVATION">проверка</string>
-    <string name="KEY_WORD_DEACTIVATION">стоп</string>
     <string name="NEW_01_01_1970">Новое от 01.01.1970</string>
     <string name="COMMON_NEW_VALUE">Новое значение</string>
+    <string name="KEY_WORD_ACTIVATION">проверка</string>
+    <string name="KEY_WORD_DEACTIVATION">стоп</string>
+    <string name="KEY_WORD_EXIT">выход</string>
+    <string name="KEY_WORD_UPDATE">обновить</string>
+    <string name="KEY_WORD_UPLOAD">выгрузить</string>
+    <string-array name="KEY_WORD_SEARCH_BY_NUMBER">
+        <item>поиск по номеру</item>
+        <item>поиск по номер</item>
+        <item>поиск номеру</item>
+        <item>поиск номер</item>
+    </string-array>
+    <string-array name="KEY_WORDS_SEARCH_BY_ID">
+        <item>поиск по счётчику</item>
+        <item>поиск по счётчик</item>
+        <item>поиск счётчику</item>
+        <item>поиск счётчик</item>
+    </string-array>
+    <string-array name="KEY_WORDS_SEARCH_BY_ROOM">
+        <item>поиск по квартире</item>
+        <item>поиск по квартир</item>
+        <item>поиск квартире</item>
+        <item>поиск квартир</item>
+    </string-array>
+
 </resources>

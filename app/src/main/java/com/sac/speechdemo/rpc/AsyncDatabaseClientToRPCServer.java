@@ -1,6 +1,5 @@
 package com.sac.speechdemo.rpc;
 
-import android.app.Activity;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;

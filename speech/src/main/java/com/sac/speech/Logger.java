@@ -1,6 +1,5 @@
 package com.sac.speech;
 
-import net.gotev.speech.BuildConfig;
 
 public class Logger {
 

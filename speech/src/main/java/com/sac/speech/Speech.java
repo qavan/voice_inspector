@@ -335,15 +335,15 @@ public class Speech {
      * @throws SpeechRecognitionNotAvailable      when speech recognition is not available on the device
      * @throws GoogleVoiceTypingDisabledException when google voice typing is disabled on the device
      */
-    public void startListening(final SpeechDelegate delegate)
-            throws SpeechRecognitionNotAvailable, GoogleVoiceTypingDisabledException {
+    public void startListening(final SpeechDelegate delegate) {
         if (mIsListening) return;
 
+//        if (mSpeechRecognizer == null) throw new SpeechRecognitionNotAvailable();
         if (mSpeechRecognizer == null)
-            throw new SpeechRecognitionNotAvailable();
+            Log.e(getClass().getSimpleName(), "SpeechRecognitionNotAvailable");
 
-        if (delegate == null)
-            throw new IllegalArgumentException("delegate must be defined!");
+//        if (delegate == null) throw new IllegalArgumentException("delegate must be defined!");
+        if (delegate == null) Log.e(getClass().getSimpleName(), "IllegalArgumentException");
 
         if (throttleAction()) {
             Logger.debug(getClass().getSimpleName(), "Hey man calm down! Throttling start to prevent disaster!");
@@ -372,8 +372,9 @@ public class Speech {
 
         try {
             mSpeechRecognizer.startListening(intent);
+//        } catch (final SecurityException exc) { throw new GoogleVoiceTypingDisabledException();
         } catch (final SecurityException exc) {
-            throw new GoogleVoiceTypingDisabledException();
+            Log.e(getClass().getSimpleName(), "GoogleVoiceTypingDisabledException");
         }
 
         mIsListening = true;

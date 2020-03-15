@@ -90,7 +90,6 @@ public class AudioUtil {
         if (mSharedPreferences.contains(String.valueOf(stream))) {
             return mSharedPreferences.getBoolean(String.valueOf(stream), false);
         }
-
         return null;
     }
 }

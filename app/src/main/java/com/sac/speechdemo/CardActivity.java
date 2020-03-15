@@ -11,7 +11,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
-import com.example.user.speechrecognizationasservice.R;
 import com.sac.speechdemo.util.Util;
 
 
