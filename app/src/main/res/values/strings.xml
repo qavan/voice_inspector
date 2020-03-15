@@ -6,7 +6,7 @@
 
     <string name="CARD_INDICATOR_HINT">Введите значение</string>
     <string name="CARD_RECORD_BUTTON">записать</string>
-    <string name="CARD_TITLE">текстовый прием показаний</string>
+    <string name="CARD_TITLE">голосовой прием показаний</string>
     <string name="CARD_ELECTRICITY">Электроэнергия</string>
     <string name="CARD_HOT_WATER">ГВС</string>
     <string name="CARD_COLD_WATER">ХВС</string>
